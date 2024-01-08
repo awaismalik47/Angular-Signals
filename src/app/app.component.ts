@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
@@ -11,4 +11,14 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'signal_project';
+    // // signal Intitlization  
+    // fName = signal('Bilal');
+    // lName = signal('Asghar');
+    // // fullName = this.fName() + " " + this.lName();
+    // changeFirstName(firstName:any){
+    //   this.fName.set(firstName)
+    // }
+    // changeLastName(lastName:any){
+    //   this.lName.set(lastName)
+    // }
 }
