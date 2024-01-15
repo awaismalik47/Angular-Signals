@@ -90,9 +90,9 @@
             </tbody>
           </table>
 
-<!-- Mutate : used to modify the Array or Object Values... -->
+<!-- Update : used to modify the Array or Object Values... -->
 <br><br> <br><br>
-<h1>Mutate signal value based on its current value </h1>
+<h1>Update signal Array value based on its current value </h1>
 <table class="table">
     <thead>
       <tr>
@@ -100,23 +100,34 @@
         <th scope="col">Name</th>
         <th scope="col">Position</th>
         <th scope="col">Department</th>
+        
       </tr>
     </thead>
     <tbody>
         <!-- ngFor Loop Syntax with Index Value -->
-        @for (item of employeeArray(); track item.name;let index=$index) {
-            <tr>  
+        @for (item of employeesSignalArray(); track item.name;let index=$index;let count=$count) {
+          <tr>  
         <td>{{index+1}}</td> 
         <td>{{item.name}}</td>
         <td>{{item.position}}</td>
         <td>{{item.department}}</td>
             </tr>
+          
+      }@empty {
+        <tr>
+          <td>No Data Found</td>
+          <td>No Data Found</td>
+          <td>No Data Found</td>
+          <td>No Data Found</td>
+        </tr>
       }
  
       
       
     </tbody>
   </table>
+  
+
  <!-- Form Fields to Add Employee -->
  @if (display) {
     <form  class="d-flex w-100 gap-3" [formGroup]="employeeForm" >
@@ -143,6 +154,88 @@
 @if(!display){
   <button class="btn btn-success"  (click)="showEmployeeFields()">+ Add Employee</button>
 }
+<!-- Switch Case in Angular 17  -->
+<br><br>
+<h1>Switch case in Angular 17 </h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Position</th>
+        <th scope="col">Department</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        <!-- ngFor Loop Syntax with Index Value -->
+        @for (item of employeesSignalArray(); track item.name;let index=$index;let count=$count) {
+            
+          @switch (item.name) {
+            @case ('ALi Afzaal') {
+              <tr style="border: 1px solid red">  
+                <td>{{index+1}}</td> 
+                <td>{{item.name}}</td>
+                <td>{{item.position}}</td>
+                <td>{{item.department}}</td>
+                    </tr>
+            }
+            @case ('Muhammad Jawad') {
+              <tr style="border: 1px solid rgb(119, 119, 0)">
+                <td>{{index+1}}</td> 
+                <td>{{item.name}}</td>
+                <td>{{item.position}}</td>
+                <td>{{item.department}}</td>
+                    </tr>
+            }
+            @default {
+              <tr style="border: 1px solid blue"> 
+                <td>{{index+1}}</td> 
+                <td>{{item.name}}</td>
+                <td>{{item.position}}</td>
+                <td>{{item.department}}</td>
+                    </tr>
+            }
+            }
+            
+          }
+         
+          
+      
+ 
+      
+      
+    </tbody>
+  </table>
+
+<!-- Modify Object values using Update .... -->
+<br><br> <br><br>
+<h1>Update signal Object value based on its current value </h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Price</th>
+        <th scope="col">Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+       <tr>  
+        <td>{{product().name}}</td> 
+        <td>{{product().category}}</td>
+        <td>{{product().price}}</td>
+        <td>{{product().rating}}</td>
+                   
+         </tbody>
+  </table>
+
+  <button class="btn btn-success" (click)="changeProduct()">Change</button>
+
+
+
+
+
   
   </div>
 

@@ -12,21 +12,27 @@ export class DashboardComponent implements OnInit{
   constructor(private fb:FormBuilder){}
  display:boolean=false
   employeeForm!:FormGroup
-  // example employee Array 
-
-  employeeArray=signal<any[]>([
-    {name:'ALi Afzaal',position:'Manager',department:'Gaming'},
-    {name:'Muhammad Jawad',position:'CEO',department:'Full Stack'},
-    {name:'Ahsan Ch',position:'SQA Engineer',department:'Quality Assurance'},
-    {name:'Haseeb Nasir',position:'Manager',department:'Amazon'},
-    {name:'usama qayaum ',position:'Assitant Manager',department:'sales & Purchase'},
-  ])
+ 
+  
   // signals Initialization  
 firstName=signal('John');
 lastName=signal('Doe');
 x=signal<number>(1);
 y=signal<number>(2)
 qty=signal<number>(5)
+employeesSignalArray=signal<any[]>([
+  {name:'ALi Afzaal',position:'Manager',department:'Gaming'},
+  {name:'Muhammad Jawad',position:'CEO',department:'Full Stack'},
+  {name:'Ahsan Ch',position:'SQA Engineer',department:'Quality Assurance'},
+  {name:'Haseeb Nasir',position:'Manager',department:'Amazon'},
+  {name:'usama qayaum ',position:'Assitant Manager',department:'sales & Purchase'},
+])
+product=signal<any>({
+  name:'laptop',
+  category:'Electronics',
+  price:2000,
+  rating:2.4
+})
 // NgOninit Here....
 ngOnInit(): void {
   this.employeeForm=this.fb.group({
@@ -34,7 +40,7 @@ ngOnInit(): void {
     position:['',Validators.required],
     department:['',Validators.required]
   })
-  
+ 
 }
 
 // computed Signals 
@@ -71,7 +77,9 @@ this.qty.update(currentValue=>
 getEmployeeDetails(){
   this.display=false;
  console.log(this.employeeForm.value)
- 
+this.employeesSignalArray.update((employee)=>[...employee,this.employeeForm.value])
+ console.log(this.employeesSignalArray());
+ this.employeeForm.reset()
 
 }
 showEmployeeFields(){
@@ -82,4 +90,15 @@ resetForm(){
   this.display=false
   this.employeeForm.reset();
 }
+changeProduct(){
+
+  this.product.update((pro)=>{
+    pro.name='Mobile';
+    return pro;
+  })
+  // this.product.mutate(product=>product.name='mobile')
+}
+sideEffect=effect(()=>console.log('Product Name has been Changed',this.employeesSignalArray()))
+
+
 }

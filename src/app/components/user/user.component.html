@@ -1,1 +1,29 @@
-<p>user works!</p>
+<div class="d-flex gap-2 searchBar_pad">
+    <input class="form-control mr-sm-2" #input  placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="getSearchedImages(input.value)">Search</button>
+  
+   </div>
+   
+<div class="container mt-3 grid-container">
+   <!-- for loop with defer block and its triggers -->
+   
+   
+    @for (item of Images; track Images.id ;let currentIndex=$index) {
+      <div class="grid-container">
+        <div>
+            <img [class]="'grid-item grid-item-' + currentIndex" src="{{item.urls.thumb}}" alt='' loading="lazy">
+          <p>{{item.description}}</p>
+        </div>
+      </div>
+    }
+</div>
+<nav aria-label="Page navigation example ">
+    <ul class="pagination d-flex justify-content-center">
+        <li class="page-item"><a class="page-link" (click)="loadImages('previous')">Previous</a></li>
+        <li class="page-item"><a class="page-link" (click)="loadImages(1)">1</a></li>
+        <li class="page-item"><a class="page-link" (click)="loadImages(2)">2</a></li>
+        <li class="page-item"><a class="page-link" (click)="loadImages(3)">3</a></li>
+        <li class="page-item"><a class="page-link" (click)="loadImages('next')">Next</a></li>
+      </ul>
+      
+  </nav>
