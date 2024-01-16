@@ -48,4 +48,20 @@ export class DataService {
     );
   }
 
+  downloadImage(imgaeUrl: string): Observable<any> {
+
+    return this.http.downloadImage(imgaeUrl).pipe(
+      map((data) => {
+        return { data, status: true, message: 'success' };
+      }),
+      catchError((error) => {
+        console.error('Error fetching images:', error);
+        return of({ data: null, status: false, message: error });
+      })
+    );
+  }
+
+
+
+
 }

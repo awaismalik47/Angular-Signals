@@ -1,29 +1,56 @@
-<div class="d-flex gap-2 searchBar_pad">
-    <input class="form-control mr-sm-2" #input  placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="getSearchedImages(input.value)">Search</button>
-  
-   </div>
-   
-<div class="container mt-3 grid-container">
-   <!-- for loop with defer block and its triggers -->
-   
-   
-    @for (item of Images; track Images.id ;let currentIndex=$index) {
-      <div class="grid-container">
-        <div>
-            <img [class]="'grid-item grid-item-' + currentIndex" src="{{item.urls.thumb}}" alt='' loading="lazy">
-          <p>{{item.description}}</p>
+
+<div class="main-container" (mouseleave)="this.indexValue=-1">
+  <div class="sidebar">
+   <button class="btn button-17" (click)="getSearchedImages('Wallpapers')">Wallpapers</button>
+   <button class="btn button-17" (click)="getSearchedImages('3D Renders')">3D Renders</button>
+   <button class="btn button-17" (click)="getSearchedImages('Nature')">Nature</button>
+   <button class="btn button-17" (click)="getSearchedImages('Architecture')">Architecture & Interiors</button>
+   <button class="btn button-17" (click)="getSearchedImages('Experimental')">Experimental</button>
+   <button class="btn button-17" (click)="getSearchedImages('Textures & Patterns')">Textures & Patterns</button>
+   <button class="btn button-17" (click)="getSearchedImages('Films')">Films</button>
+   <button class="btn button-17" (click)="getSearchedImages('Travel')">Travel</button>
+   <button class="btn button-17" (click)="getSearchedImages('Street Photography')">Street Photography</button>
+   <button class="btn button-17" (click)="getSearchedImages('Animals')">Animals</button>
+   <button class="btn button-17" (click)="getSearchedImages('Food & Drink')">Food & Drink</button>
+   <button class="btn button-17" (click)="getSearchedImages('People')">People</button>
+   <button class="btn button-17" (click)="getSearchedImages('Health & Wellness')">Health & Wellness</button>
+   <button class="btn button-17" (click)="getSearchedImages('Spirituality')">Spirituality</button>
+   <button class="btn button-17" (click)="getSearchedImages('Current Events')">Current Events</button>
+   <button class="btn button-17" (click)="getSearchedImages('Fashion & Beauty')">Fashion & Beauty</button>
+   <button class="btn button-17" (click)="getSearchedImages('Business')">Business</button>
+  </div>
+  <div class="content">
+    <div class="d-flex gap-2 searchBar_pad">
+      <input class="form-control mr-sm-2" #input  placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="getSearchedImages(input.value)">Search</button>
+    
+     </div>
+     
+  <div class="container mt-3 grid-container">
+     <!-- for loop with defer block and its triggers -->
+     
+     
+      @for (item of Images; track Images.id ;let currentIndex=$index) {
+        <div class="grid-container">
+            <img [class]="'grid-item grid-item-' + currentIndex" src="{{item.urls.thumb}}" alt='' loading="lazy" (mousemove)="viewDownloadBtn(currentIndex)">
+           @if (currentIndex === indexValue) {
+            <p class="download-button" (click)="getImageDownloadLink(item)">+</p>
+           }
+           
+            <p>{{item.description}}</p>
         </div>
-      </div>
-    }
+      }
+  </div>
+  <nav aria-label="Page navigation example ">
+      <ul class="pagination d-flex justify-content-center">
+          <li class="page-item"><a class="page-link" (click)="loadImages('previous')">Previous</a></li>
+          <li class="page-item"><a class="page-link" (click)="loadImages(1)">1</a></li>
+          <li class="page-item"><a class="page-link" (click)="loadImages(2)">2</a></li>
+          <li class="page-item"><a class="page-link" (click)="loadImages(3)">3</a></li>
+          <li class="page-item"><a class="page-link" (click)="loadImages('next')">Next</a></li>
+        </ul>
+        
+    </nav>
+  </div>
 </div>
-<nav aria-label="Page navigation example ">
-    <ul class="pagination d-flex justify-content-center">
-        <li class="page-item"><a class="page-link" (click)="loadImages('previous')">Previous</a></li>
-        <li class="page-item"><a class="page-link" (click)="loadImages(1)">1</a></li>
-        <li class="page-item"><a class="page-link" (click)="loadImages(2)">2</a></li>
-        <li class="page-item"><a class="page-link" (click)="loadImages(3)">3</a></li>
-        <li class="page-item"><a class="page-link" (click)="loadImages('next')">Next</a></li>
-      </ul>
-      
-  </nav>
+
