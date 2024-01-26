@@ -8,13 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   imports: [UserComponent,HttpClientModule],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  styleUrl: './admin.component.scss',
+
 })
 export class AdminComponent implements OnInit {
  
   constructor(){
 
   }
+  
   ngOnInit(): void {
    
   }

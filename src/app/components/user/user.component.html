@@ -20,9 +20,8 @@
    <button class="btn button-17" (click)="getSearchedImages('Business')">Business</button>
   </div>
   <div class="content">
-    <div class="d-flex gap-2 searchBar_pad">
-      <input class="form-control mr-sm-2" #input  placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="getSearchedImages(input.value)">Search</button>
+    <div class="d-flex  searchBar_pad">
+      <input class="form-control mr-sm-2" #input (keyup)="getSearchedImages(input.value)" placeholder="Search" aria-label="Search">
     
      </div>
      
@@ -35,8 +34,10 @@
             <img [class]="'grid-item grid-item-' + currentIndex" src="{{item.urls.thumb}}" alt='' loading="lazy" (mousemove)="viewDownloadBtn(currentIndex)">
            @if (currentIndex === indexValue) {
             <p class="download-button" (click)="getImageDownloadLink(item)">+</p>
+
            }
-           
+           <p class=" button-left" (click)="openUserDialog(item)"><span class="fs-6">Photographer:</span>{{item.user.first_name}} {{item.user.last_name}}</p>
+        
             <p>{{item.description}}</p>
         </div>
       }
